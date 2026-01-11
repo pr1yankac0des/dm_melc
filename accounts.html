@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts | MELC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- PAGE SPECIFIC STYLES --- */
+        body {
+            background-attachment: fixed;
+        }
+
+        .accounts-section {
+            padding: 140px 5% 80px; /* Adjusted top padding for fixed header */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- USER AUTH CARD --- */
+        .auth-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            background: rgba(0, 31, 63, 0.4);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            overflow: hidden;
+            padding: 50px;
+            max-width: 1100px;
+            width: 100%;
+            margin-top: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-form h3 {
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        /* --- USER PROFILE (Right Side) --- */
+        .profile-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .plan-badge {
+            display: inline-block;
+            background: rgba(0, 255, 127, 0.1);
+            color: #00ff7f;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            border: 1px solid rgba(0, 255, 127, 0.2);
+            font-weight: 600;
+        }
+
+        .usage-stat {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #b0c4de;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-blue);
+            width: 45%; 
+            border-radius: 4px;
+        }
+
+        .section-header-accounts {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Divider Line */
+        .vertical-divider {
+            width: 1px;
+            background: rgba(255,255,255,0.1);
+            display: none; /* Hidden by default, useful if we change layout */
+        }
+
+        @media (max-width: 900px) {
+            .auth-grid { 
+                grid-template-columns: 1fr; 
+                padding: 30px;
+            }
+            .profile-card {
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-container">
+            <img src="logo.png" alt="DataMatrix Logo" class="logo">
+            <div class="logo-text">
+                <span class="text-white">Datamatrix</span><span class="text-white">.AI</span>
+            </div>
+        </a>
+       <nav>
+            <ul>
+                <li><a href="melc.html">Home</a></li>
+                <li><a href="melc.html#how-it-works">Features</a></li>
+                <li><a href="melc.html#pricing">Plans</a></li>
+                <li><a href="accounts.html" style="color: #00ff7f;">Login</a></li>
+            </ul>
+        </nav>
+        <a href="melc.html#contact" class="btn-reach">Request Demo</a>
+    </header>
+
+    <section class="accounts-section">
+        
+        <div class="section-header-accounts">
+            <h2 class="section-title">Account Management</h2>
+            <p class="section-subtitle">Manage your subscription and view usage analytics.</p>
+        </div>
+
+        <div class="auth-grid">
+            
+            <div class="auth-form">
+                <h3>Sign In</h3>
+                <form action="#">
+                    <div class="form-group">
+                        <label style="color: #b0c4de; font-size: 0.9rem; margin-bottom: 5px; display:block;">Work Email</label>
+                        <input type="email" placeholder="name@company.com" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: #b0c4de; font-size: 0.9rem; margin-bottom: 5px; display:block;">Password</label>
+                        <input type="password" placeholder="••••••••" class="form-input" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" style="margin-bottom: 20px;">Log In</button>
+                    
+                    <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                        <p style="color: #b0c4de; font-size: 0.9rem; margin-bottom: 10px;">Don't have an account?</p>
+                        <button type="button" class="btn-outline" style="width: 100%; font-size: 0.9rem;">Create New Account</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="profile-details">
+                <h3 style="color: white; font-family: 'Outfit', sans-serif; margin-bottom: 25px;">Your Subscription</h3>
+                
+                <div class="profile-card">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+                        <div>
+                            <h4 style="color: #fff; font-size: 1.4rem; margin-bottom: 5px;">Professional Plan</h4>
+                            <span class="plan-badge">Active</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <h2 style="color: var(--accent-blue); margin: 0; font-size: 2rem;">$149</h2>
+                            <span style="color: #b0c4de; font-size: 0.85rem;">/ month</span>
+                        </div>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 25px;">
+
+                    <div class="usage-stat">
+                        <span>Transcription Hours</span>
+                        <span>22 / 50 hrs</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 44%;"></div>
+                    </div>
+
+                    <div class="usage-stat">
+                        <span>Storage Used</span>
+                        <span>45%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%; background: #00ff7f;"></div>
+                    </div>
+
+                    <div style="margin-top: auto; display: flex; gap: 15px;">
+                        <button class="btn-outline" style="flex: 1; font-size: 0.9rem; padding: 10px;">View Invoices</button>
+                        <button class="btn-primary" style="flex: 1; font-size: 0.9rem; padding: 10px; border: none;">Upgrade Plan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-container">       
+            <div class="footer-col company-info">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="DataMatrix AI Logo" class="logo-img">
+                    <h2>Datamatrix<span class="highlight">.AI</span></h2>
+                </div>
+                <p class="company-desc">
+                    Transforming businesses through innovative AI solutions.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Main Home</a></li>
+                    <li><a href="melc.html">MELC Product</a></li>
+                    <li><a href="melc.html#pricing">Plans</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">&copy; 2025 DataMatrixai. All rights reserved.</div>
+        </div>
+    </footer>
+
+</body>
+</html>

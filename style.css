@@ -1,0 +1,1138 @@
+/* --- 1. COLOR VARIABLES --- */
+:root {
+    --prussian-blue: #003153; 
+    --accent-green: #2E8B57; 
+    --white: #ffffff;
+    --text-dark: #333333;
+    --text-grey: #666666;
+    --hero-highlight: #3b82f6; 
+    --btn-blue: #0066cc; 
+    --cursor-color:var(--accent-green);
+
+    --bg-dark: #05070a;      
+    --glow-blue: #1a3a5a;    /* Brighter blue */
+    --glow-purple: #251b4a;  /* Brighter purple */
+    --accent-blue: #00a2ff;
+    --text-main: #ffffff;
+    --text-dim: #b0b3b8;
+}
+
+/* --- 2. GLOBAL RESET --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    /* Increased the percentage (80%) so the colors spread further across the black background */
+    background: 
+        radial-gradient(circle at 20% 40%, var(--glow-blue) 0%, var(--bg-dark) 80%),
+        radial-gradient(circle at 80% 20%, var(--glow-purple) 0%, var(--bg-dark) 80%);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+    background-attachment: fixed; /* Keeps the gradient static while you scroll */
+}
+
+a { text-decoration: none; }
+
+/* --- 3. NAVIGATION BAR --- */
+/* --- GLASSY TRANSPARENT HEADER --- */
+header {
+    /* 1. Make background transparent/glassy */
+    background: rgba(255, 255, 255, 0.1); /* 10% opaque white */
+    backdrop-filter: blur(10px);          /* Blurs what's behind it */
+    -webkit-backdrop-filter: blur(10px);  /* Safari support */
+    
+    /* 2. Position it ON TOP of the image */
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures it floats above everything */
+    
+    /* 3. Remove default borders/shadows if you want it cleaner */
+    box-shadow: none; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle edge */
+
+    /* 4. Layout (Keep existing) */
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+}
+
+/* Optional: Since the header is now floating, you might want to 
+   add some top padding to the Hero so text doesn't hide behind the logo */
+
+.logo-container { display: flex; align-items: center; gap: 12px; }
+
+.logo-container img.logo {
+    height: 40px;  /* Adjust this value to make it smaller or bigger */
+    width: auto;   /* Maintains aspect ratio */
+}
+
+.logo-text {
+    font-size: 1.1rem; /* Reduced from 1.5rem */
+    line-height: 1.1;
+}
+
+.tagline-text {
+    font-size: 0.75rem; /* Makes the tagline much smaller and elegant */
+    opacity: 0.8;
+    color: whitesmoke;
+}
+
+.text-white { color: var(--white); }
+
+nav {
+    /* THIS IS THE KEY FIX: */
+    margin-left: auto; /* Pushes the nav (and button) to the far right */
+    margin-right: 30px; /* Adds space between the Links and the Button */
+}
+
+nav ul { 
+    display: flex; 
+    list-style: none; 
+    gap: 30px; /* Space between each link */
+}
+
+nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--accent-blue);
+}
+
+.btn-reach {
+    background-color: #000000; 
+    color: var(--white);
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    /* ensure button doesn't shrink */
+    white-space: nowrap; 
+}
+
+.btn-reach:hover {
+    background-color: var(--accent-green); 
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column; /* Stacks header over the main content */
+    height: auto;
+    min-height: 100vh;
+    padding: 100px 8% 55px; /* Space for fixed navigation */
+}
+
+/* 1. Top Header Box */
+/* Hero Section - Strict Full Screen Layout */
+.hero {
+    /* 1. Force the container to be exactly the height of the window */
+    min-height: 100vh; 
+    width: 100%;
+
+    /* 2. Flexbox Magic: This centers everything perfectly */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically aligns to the middle */
+    align-items: center;     /* Horizontally aligns to the middle */
+
+    /* 3. Padding Adjustments */
+    /* 80px Top: clears your fixed navbar */
+    /* 0px Bottom: ensures no extra gap pushes the footer up */
+    padding: 80px 20px 0; 
+    
+    position: relative;
+    box-sizing: border-box;
+}
+.hero-header-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* 2. Main Layout (The Split Section) */
+.hero-main-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+}
+
+/* Space for your upcoming content */
+.hero-left-new {
+    flex: 1;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 40px;
+}
+
+.hero-left-new .lead-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.7;
+    color: var(--white);
+    margin-bottom: 0; /* Remove bottom margin to connect the borders */
+    
+    /* Strong Blue Border */
+    padding: 10px 0 10px 20px;
+    border-left: 3px solid var(--accent-blue);
+    
+    -webkit-font-smoothing: antialiased;
+}
+
+.hero-left-new .detail-text {
+    /* SAME Font family as lead for uniformity */
+    font-family: 'Inter', sans-serif;
+    
+    /* Smaller size and weight, but same style */
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.7;
+    
+    /* Muted border and text color to differentiate */
+    color: rgba(255, 255, 255, 0.7);
+    padding: 10px 0 20px 25px;
+    
+    /* Subtle Grey/Dim Border that matches the blue alignment */
+    border-left: 3px solid rgba(255, 255, 255, 0.15);
+    
+    max-width: 580px;
+}
+
+.hero-title {
+    font-family: 'Outfit', sans-serif; /* Matches Services Header */
+    font-size: 3rem !important; 
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em; /* Premium tight spacing */
+    text-align: center;
+    white-space: nowrap; /* Forces one single line */
+    margin-bottom: 15px;
+}
+
+.hero-title .highlight {
+    display: inline;      /* Changed from 'block' to keep on same line */
+    color: var(--accent-blue);
+    text-shadow: 0 0 30px rgba(0, 162, 255, 0.3);
+    border-bottom: none;  /* Removes the old underline */
+}
+
+.hero-header-content .hero-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.0rem !important; /* Forces the small size */
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    opacity: 0.85; /* Makes it look professionally 'dimmed' */
+}
+
+.hero-video {
+    flex: 1.2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.hero-video video {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 24px; /* Matches the rounded look in the image */
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 2.5rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: black;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    /* ADDED: Centers the paragraph block itself */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- BUTTONS --- */
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center !important;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+/* --- 1. PRIMARY BUTTON (Get Started) --- */
+.btn-primary {
+    background: var(--accent-blue);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid var(--accent-blue); /* Added border to match sizing */
+    box-shadow: 0 0 20px rgba(0, 162, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    background: transparent; /* Becomes outline on hover */
+    color: white;
+}
+
+/* --- 2. OUTLINE BUTTON (Explore Services) --- */
+/* Target both btn-outline and btn-secondary for safety */
+.btn-outline, .btn-secondary {
+    background: transparent;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid white; /* Initial white outline */
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover, .btn-secondary:hover {
+    background: var(--accent-blue); /* Becomes solid blue on hover */
+    border-color: var(--accent-blue);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(0, 162, 255, 0.4);
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 1024px) {
+    /* Tablet/Laptop adjustments */
+    .hero h1 { font-size: 2.2rem; } /* Shrink font so it fits on smaller screens */
+}
+
+@media (max-width: 900px) {
+    .services-split-container {
+        flex-direction: column;
+    }
+    .services-visual {
+        position: relative;
+        top: 0;
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    header { padding: 0 20px; }
+    nav ul { display: none; }
+    .hero h1 { font-size: 2rem; }
+    
+    /* Disable typewriter on mobile to prevent layout breaking */
+    .typewriter {
+        width: auto;
+        border-right: none;
+        animation: none;
+        white-space: normal;
+    }
+    
+    .hero-buttons { flex-direction: column; }
+/* --- REACH US BUTTON (Pill Shape) --- */
+    .btn-reach {
+        background-color: var(--btn-blue);
+        color: var(--white);
+        
+        /* 1. THIS CONTROLS THE SHAPE */
+        border-radius: 50px; /* Makes it fully rounded like "Get Started" */
+        
+        /* 2. Remove default borders */
+        border: none;
+        
+        padding: 10px 25px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .btn-reach:hover {
+        transform: translateY(-3px); /* Hover float effect */
+        box-shadow: 0 4px 15px rgba(0, 102, 204, 0.4); /* Glow effect */
+    }
+}
+
+/* --- LOGO SIZE CONTROL --- */
+.logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+/* --- PRODUCTS SECTION (Glow on Left) --- */
+.products-section {
+    padding: 50px 8%;
+    /* Horizontal gradient matching the "Z" flow (starts Left) */
+    background: linear-gradient(
+        90deg, 
+        hsl(221, 39%, 15%) 0%,  /* Dark Navy on the Left */
+        #05070a 60%            /* Fades to Black on the Right */
+    ) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Local Left Glow to anchor the section */
+.products-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -10%;
+    width: 600px;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 162, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* PRODUCT CARDS */
+.product-card {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 24px;
+    padding: 40px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+}
+
+/* THE ICON CONTAINER (Matches your Image Radius) */
+.product-icon-container {
+    width: 70px;
+    height: 70px;
+    background: rgba(0, 162, 255, 0.1);
+    border: 1px solid rgba(0, 162, 255, 0.2);
+    border-radius: 18px; /* Matches the rounded look of your videos/images */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    color: var(--accent-blue);
+    font-size: 1.8rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--accent-blue);
+}
+
+.product-card.highlighted {
+    border: 1px solid rgba(0, 162, 255, 0.4);
+    background: rgba(0, 162, 255, 0.03);
+}
+
+.product-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    margin-bottom: 15px;
+}
+
+.product-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.7;
+    color: var(--white);
+    margin-bottom: 25px; /* Remove bottom margin to connect the borders */
+    -webkit-font-smoothing: antialiased;
+}
+
+.product-link {
+    font-family: 'Inter', sans-serif;
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.3s ease;
+}
+
+.product-link:hover {
+    gap: 12px;
+}
+
+.image-frame {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(0, 162, 255, 0.15);
+}
+
+/* 2. Remove Old Colored Top Borders */
+.border-blue, .border-purple, .border-green {
+    border-top: none !important;
+}
+
+/* 4. Icons (Pure White, No Box) */
+.icon-box {
+    /* Remove old colored box styling */
+    background-color: transparent !important;
+    border: none !important;
+    width: auto;
+    height: auto;
+    padding: 0;
+    display: flex;         /* Enables side-by-side alignment */
+    align-items: center;   /* Vertically centers the icon with the text */
+    gap: 15px;             /* Adds space between the icon and the text */
+    margin-bottom: 18px;   /* Optional: adds space below the header */
+}
+
+.icon-box h3 {
+    margin: 0;
+    line-height: 1;         /* Crucial: Removes extra spacing above/below letters */
+    display: flex;          /* Ensures the text block itself follows flex rules */
+    align-items: center;    /* Secondary centering for the text block */
+}
+
+/* Make the SVG icon itself white */
+.icon-box svg {
+    width: 32px;
+    height: 32px;
+    color: #ffffff; /* Sets stroke/fill to white */
+    /* Ensure fill is none if using stroke icons */
+    fill: none; 
+    display: block;         /* Removes the 'inline' baseline gap at the bottom */
+    flex-shrink: 0;
+}
+
+/* Headers */
+.section-title {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.section-subtitle {
+    color: var(--white);
+    margin-bottom: 60px;
+    font-size: 1.1rem;
+}
+
+/* --- PILLS (Tags) --- */
+.pill-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Section Container - Set height here to match Tech Stack */
+.about-us-section {
+    position: relative;
+    width: 100%;
+    /* Consistent height with other sections */
+    min-height: 850px; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* BACKGROUND IMAGE SETUP */
+    background-image: url('team.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Keeps the background fixed while scrolling (Parallax effect) */
+    background-attachment: scroll;
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 40px 20px;
+}
+
+/* Dark Overlay: This adds a dark Prussian Blue tint over your image 
+   so the white text and glowing green elements pop out. */
+.about-us-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Adjust opacity (0.85) if you want to see more of your image */
+    background-color: rgba(0, 31, 63, 0.85); 
+    z-index: 1;
+}
+
+/* Container to ensure content sits above the overlay */
+.about-us-section .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.section-title2 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+}
+
+/* The Team Card - Glass Effect */
+/* The Upgraded Premium Glass Card */
+/* --- THE GLASS CARD --- */
+.team-card {
+    /* Dark semi-transparent blue base */
+    background: rgba(0, 31, 63, 0.5); 
+    
+    /* Surface Reflection Gradient */
+    background-image: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.08) 0%, 
+        rgba(255, 255, 255, 0.01) 100%
+    );
+    
+    /* Strong Blur for the "Frosted" look */
+    backdrop-filter: blur(20px);         
+    -webkit-backdrop-filter: blur(20px); 
+    
+    /* Subtle White/Blue Border */
+    border: 1px solid rgba(100, 181, 246, 0.2); 
+    border-top: 1px solid rgba(100, 181, 246, 0.4); 
+    
+    border-radius: 24px;
+    padding: 60px 40px;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    
+    /* Initial Shadow */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transform: translateZ(0); 
+    will-change: transform, backdrop-filter;
+}
+
+/* --- HOVER EFFECT --- */
+.team-card:hover {
+    transform: translateY(-10px);
+    /* Outer Blue Glow on Hover */
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.5), 
+        0 0 30px rgba(0, 123, 255, 0.3); 
+    border-color: rgba(0, 123, 255, 0.5); /* Blue Border on Hover */
+}
+
+/* --- PROFILE IMAGE CIRCLE (The Key Feature) --- */
+.profile-img-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    padding: 5px;
+    
+    /* SOLID ELECTRIC BLUE GRADIENT RING */
+    background: linear-gradient(180deg, #007bff, #00c6ff); 
+    
+    /* PERMANENT BLUE GLOW */
+    box-shadow: 0 0 25px rgba(0, 123, 255, 0.6); 
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    /* Dark border to separate image from the glowing ring */
+    border: 3px solid #001f3f; 
+    background-color: #fff;
+}
+
+/* Typography */
+.member-name {
+    color: #ffffff;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.member-bio {
+    color: #e0e6ed; 
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Social Icons */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icon {
+    color: #ffffff;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Icons turn Neon Blue on Hover */
+.social-icon:hover {
+    color: #00c6ff; 
+    transform: translateY(-3px);
+    text-shadow: 0 0 15px rgba(0, 198, 255, 0.8);
+}
+.contact-section {
+    position: relative;
+    width: 100%;
+    min-height: 850px; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* BACKGROUND IMAGE SETUP */
+    background-image: url('reachushere.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Parallax effect (image stays still while scrolling) */
+    background-attachment: scroll; 
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 60px 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 3rem;
+    text-transform: capitalize;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.contact-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    
+    /* 1. High Transparency (0.25) so background image shows through */
+    background: rgba(0, 31, 63, 0.25); 
+    
+    /* 2. Gradient Sheen (Subtle reflection) */
+    background-image: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.05) 0%, 
+        rgba(255, 255, 255, 0.01) 100%
+        
+    );
+    
+    /* 3. Strong Blur to frost the background image behind it */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    /* 4. Glass Borders */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    
+    /* 5. Soft Shadow to lift it slightly */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    transform: translateZ(0); 
+    will-change: transform, backdrop-filter;
+}
+.contact-wrapper:hover {
+    transform: translateY(-5px); /* Gentle float on hover */
+}
+
+/* --- LEFT COLUMN: FORM --- */
+.form-column {
+    flex: 1;
+    min-width: 350px;
+    padding: 50px 40px;
+    /* Light divider line */
+    border-right: 1px solid rgba(255, 255, 255, 0.08); 
+}
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-input {
+    width: 100%;
+    /* Very see-through dark tint */
+    background: rgba(0, 0, 0, 0.2); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+.form-input:focus {
+    /* On focus, they become slightly more solid/readable */
+    background: rgba(0, 0, 0, 0.4); 
+    border-color: #00ff7f; /* Green Focus Border */
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.1);
+}
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    /* Bright Green Gradient */
+    background: linear-gradient(90deg, #00ff7f, #00c853); 
+    color: #001f3f;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 255, 127, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 127, 0.5);
+}
+
+/* --- RIGHT COLUMN: INFO --- */
+.info-column {
+    flex: 1;
+    min-width: 350px;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Ensure no solid background here covers the glass */
+    background: transparent; 
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.info-text h4 {
+    color: #00ff7f; /* Green Headings */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.info-text p {
+    color: #e0e0e0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .contact-wrapper {
+        flex-direction: column;
+    }
+    .form-column {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+}
+/* --- FOOTER MAIN SECTION --- */
+.site-footer {
+    background-color: #000d1a; /* Very dark, almost black blue */
+    color: #b0c4de; /* Light grey-blue text for readability */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 80px 20px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    /* Creates 4 columns. The first one is slightly wider (1.5fr) */
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+/* Headings */
+/* Center the Heading Text */
+.footer-heading {
+    text-align: center;         /* Centers the text in the column */
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 12px;
+    font-weight: 600;
+}
+
+/* Center the Green Bar */
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    
+    /* These two lines center the bar perfectly: */
+    left: 50%;                  
+    transform: translateX(-50%);
+    
+    bottom: 0;
+    width: 40px;                /* Length of the bar */
+    height: 4px;                /* Thickness */
+    background-color: #00ff7f;  /* Neon Green */
+    border-radius: 2px;
+}
+
+/* --- COLUMN 1: BRANDING --- */
+.footer-logo h2 {
+    margin-bottom: 0;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.footer-logo .highlight {
+    color: #00ff7f; /* Green "ai" */
+}
+
+.company-desc {
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    color: #fff;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    background: #00ff7f;
+    color: #000;
+    transform: translateY(-3px);
+}
+
+/* --- LINKS LISTS --- */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #b0c4de;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #00ff7f; /* Green on hover */
+    padding-left: 5px; /* Slight slide effect */
+}
+
+/* --- NEWSLETTER --- */
+.newsletter-desc {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: #fff;
+    outline: none;
+}
+
+.newsletter-form input:focus {
+    border-color: #00ff7f;
+}
+
+.newsletter-form button {
+    padding: 12px;
+    background-color: #003153; /* Prussian Blue button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.newsletter-form button:hover {
+    background-color: #00ff7f;
+    color: #001f3f;
+}
+
+/* --- BOTTOM BAR --- */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: #718096;
+}
+
+.legal-links a {
+    color: #718096;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.2s;
+}
+
+.legal-links a:hover {
+    color: #fff;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr; /* 2 columns on tablets */
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-container {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+        text-align: center;
+    }
+    
+    .footer-heading::after {
+        left: 50%;
+        transform: translateX(-50%); /* Center the dash */
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .legal-links a {
+        margin: 0 10px;
+    }
+}
+.footer-logo {
+    display: flex;       /* Aligns image and text side-by-side */
+    align-items: center; /* Vertically centers them */
+    gap: 15px;           /* Adds space between the logo image and the text */
+    margin-bottom: 20px;
+}
+.logo-img {
+    width: 50px;         /* Adjust this size (e.g., 40px or 60px) to fit your design */
+    height: auto;        /* Keeps the aspect ratio correct */
+}
+/* Disable fixed backgrounds on mobile/tablets to stop lag */
+@media (max-width: 1024px) {
+    section, .success-stories-section, .about-us-section, .contact-section {
+        background-attachment: scroll !important;
+    }
+}
+.hero h1, 
+.hero h1 span, 
+.hero p, 
+.typewriter, 
+.highlight {
+    /* 1. Kills any rotation */
+    transform: none !important; 
+    rotate: 0deg !important;
+    
+    /* 2. Kills any leaning/skewing */
+    font-style: normal !important; 
+    
+    /* 3. Ensures the container is flat */
+    perspective: none !important;
+}

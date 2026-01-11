@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MELC | DataMatrix AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- 1. Compact Hero Styles --- */
+        .hero-compact {
+            padding-top: 140px; 
+            padding-bottom: 10px;
+            min-height: auto;
+            text-align: center;
+        }
+
+        /* --- 2. SINGLE LINE GRID (Empowering Business) --- */
+        .compact-grid {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            gap: 15px;
+            padding-top: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .benefit-card {
+            flex: 1;
+            min-width: 180px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .benefit-card h3 {
+            font-size: 1rem;
+            margin: 10px 0;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .benefit-card p {
+            font-size: 0.8rem;
+            color: #b0c4de;
+            line-height: 1.4;
+            margin-bottom: 0;
+        }
+        .benefit-icon {
+            color: #00ff7f;
+            font-size: 1.4rem;
+        }
+
+        /* --- 3. HOW IT WORKS (7 Step Flow - 2 Rows) --- */
+        .process-section {
+            padding: 80px 2%; 
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 31, 63, 0.3) 100%);
+        }
+
+        .process-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; 
+            flex-wrap: wrap; 
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .process-card {
+            flex: 0 0 21%; 
+            min-width: 200px;
+            background: rgba(0, 162, 255, 0.05);
+            border: 1px solid rgba(0, 162, 255, 0.2);
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .process-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ff7f;
+            box-shadow: 0 10px 30px rgba(0, 255, 127, 0.1);
+        }
+
+        .process-number {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-dark);
+            border: 2px solid var(--accent-blue);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            margin: 0 auto 15px;
+            font-size: 1rem;
+        }
+
+        .process-card:hover .process-number {
+            border-color: #00ff7f;
+            color: #00ff7f;
+        }
+
+        .process-card h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            height: 2.4em; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .process-card p {
+            color: #b0c4de;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .arrow-next {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 1.2rem;
+            margin: 0 5px;
+        }
+
+        /* --- 4. VIDEO PLACEHOLDER --- */
+        .video-wrapper {
+            max-width: 900px;
+            margin: 80px auto 0; 
+            text-align: center;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 450px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.3s;
+        }
+
+        .video-placeholder:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 255, 127, 0.1);
+            border: 2px solid #00ff7f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #00ff7f;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-placeholder:hover .play-button {
+            background: #00ff7f;
+            color: #000;
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 127, 0.4);
+        }
+
+        /* --- 5. CASE STUDIES SECTION --- */
+        .case-studies-section {
+            padding: 100px 5%;
+            background: #020b16; 
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .case-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .case-intro-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .case-intro-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 162, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            flex-shrink: 0;
+        }
+
+        /* --- UPDATED: SINGLE ROW STATS --- */
+        .stats-grid {
+            display: flex;          
+            flex-wrap: nowrap;      
+            justify-content: space-between;
+            gap: 20px;
+            overflow-x: auto;       
+            padding-bottom: 20px;   
+        }
+
+        .stat-card {
+            flex: 1;                
+            min-width: 200px;       
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 127, 0.2);
+            padding: 25px 20px;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff7f;
+            box-shadow: 0 0 20px rgba(0, 255, 127, 0.1);
+        }
+
+        .stat-number {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem; 
+            font-weight: 700;
+            color: #00ff7f;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            color: #00ff7f;
+            margin-bottom: 10px;
+        }
+
+        .stat-desc {
+            color: #b0c4de;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* --- 6. PRICING SECTION --- */
+        .pricing-section {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, #020b16 0%, #001f3f 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .pricing-card.popular {
+            border: 1px solid var(--accent-blue);
+            background: rgba(0, 162, 255, 0.05);
+            box-shadow: 0 0 30px rgba(0, 162, 255, 0.1);
+        }
+
+        .pricing-card.popular::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-blue);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .plan-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .plan-price {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: #b0c4de;
+            font-weight: 400;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 40px;
+            text-align: left;
+            flex-grow: 1; 
+        }
+
+        .features-list li {
+            color: #b0c4de;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .features-list li i {
+            color: #00ff7f;
+        }
+
+        .btn-pricing {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-pricing:hover, .pricing-card.popular .btn-pricing {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: #fff;
+        }
+
+        .pricing-card.popular .btn-pricing:hover {
+            background: #008ecc;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 900px) {
+            .process-card { flex: 0 0 45%; } 
+            .arrow-next { display: none; } 
+            .video-placeholder { height: 300px; }
+            .case-intro-card { flex-direction: column; text-align: center; }
+            .stats-grid { padding-bottom: 20px; } 
+        }
+        @media (max-width: 600px) {
+            .process-card { flex: 0 0 100%; } 
+        }
+        
+        /* Select Dropdown Fix */
+        select.form-input {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+            cursor: pointer;
+        }
+        select.form-input option {
+            background-color: var(--bg-dark);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-container">
+            <img src="logo.png" alt="DataMatrix Logo" class="logo">
+            <div class="logo-text">
+                <span class="text-white">Datamatrix</span><span class="text-white">.AI</span>
+            </div>
+        </a>
+       <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#pricing">Plans</a></li>
+                <li><a href="accounts.html">Accounts</a></li>
+                <li><a href="index.html#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+        <a href="#demo" class="btn-reach">Request Demo</a>
+    </header>
+
+    <section class="hero hero-compact">
+        <div class="hero-header-container" style="margin-bottom: 20px;">
+            <div class="hero-header-content">
+                <h1 class="hero-title" style="white-space: normal; line-height: 1.2; margin-bottom: 15px;">
+                    MELC: <span class="highlight">Multi-modal Evaluation</span> <br>& Listening Companion
+                </h1>
+                <p class="hero-subtitle" style="margin-bottom: 25px;">
+                    MeLC (Multi-modal Evaluation & Listening Companion) is an AI powered Conversational Audit product which offers a multilingual audio transcription and audit platform that enhances customer satisfaction by ensuring accurate communication and responses. This tool is designed to streamline the auditing process, making it easier to analyse customer interactions and derive actionable insights.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#demo" class="btn-primary">Book a Demo</a>
+                    <a href="https://drive.google.com/file/d/1ryATreNnQ5hlqfR3zoTYfWgXmTfCZqAX/view?usp=drive_link" target="_blank" class="btn-outline"><i class="fas fa-play"></i> Watch Video</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" style="padding: 0 5% 40px;">
+        <h3 style="text-align: center; color: white; margin-bottom: 15px; font-family: 'Outfit', sans-serif;">Empowering Businesses</h3>
+        <div class="compact-grid">
+            <div class="benefit-card">
+                <i class="fas fa-handshake benefit-icon"></i>
+                <h3>Deepens Relationships</h3>
+                <p>Enhanced personalized support drives Client Loyalty.</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-chart-line benefit-icon"></i>
+                <h3>Accelerates CLV</h3>
+                <p>Converts transactional customers into long-term clients.</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-coins benefit-icon"></i>
+                <h3>Unlocks Revenue</h3>
+                <p>Identifies precise moments for cross-selling and up-selling.</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-chalkboard-user benefit-icon"></i>
+                <h3>Empowers Managers</h3>
+                <p>Provides actionable intelligence for targeted coaching.</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-shield-halved benefit-icon"></i>
+                <h3>Tangible ROI</h3>
+                <p>Measurable improvements in Revenue and CSAT.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="process-section">
+        <h2 class="section-title" style="text-align: center; font-size: 2.5rem; margin-bottom: 50px;">How MELC Works</h2>
+        
+        <div class="process-container">
+            <div class="process-card">
+                <div class="process-number">01</div>
+                <h3>Parse & Pre-process</h3>
+                <p>Unstructured transcript files are automatically parsed and pre-processed.</p>
+            </div>
+            <i class="fas fa-chevron-right arrow-next"></i>
+            <div class="process-card">
+                <div class="process-number">02</div>
+                <h3>Transcribe & Analyze</h3>
+                <p>Multilingual audio is transcribed and analyzed for content accuracy.</p>
+            </div>
+            <i class="fas fa-chevron-right arrow-next"></i>
+            <div class="process-card">
+                <div class="process-number">03</div>
+                <h3>Refine Insights</h3>
+                <p>Insights are refined and contextualized using advanced AI models.</p>
+            </div>
+            <i class="fas fa-chevron-right arrow-next"></i>
+            <div class="process-card">
+                <div class="process-number">04</div>
+                <h3>Structure Data</h3>
+                <p>AI-generated outputs are structured and stored in a centralized database.</p>
+            </div>
+
+            <i class="fas fa-chevron-right arrow-next"></i>
+            
+            <div class="process-card">
+                <div class="process-number">05</div>
+                <h3>Generate Feedback</h3>
+                <p>Generates targeted feedback and detailed summaries for agents.</p>
+            </div>
+            <i class="fas fa-chevron-right arrow-next"></i>
+            <div class="process-card">
+                <div class="process-number">06</div>
+                <h3>Highlight Concerns</h3>
+                <p>Flags immediate concerns, improvement areas, and coaching needs.</p>
+            </div>
+            <i class="fas fa-chevron-right arrow-next"></i>
+            <div class="process-card">
+                <div class="process-number">07</div>
+                <h3>Visualize Analytics</h3>
+                <p>Dashboards and analytics are generated for decision-makers.</p>
+            </div>
+        </div>
+
+        <div class="video-wrapper">
+            <h3 style="color: white; margin-bottom: 25px; font-family: 'Outfit', sans-serif; font-size: 1.5rem;">Watch MELC in Action</h3>
+            <div class="video-placeholder">
+                <div class="play-button">
+                    <i class="fas fa-play" style="margin-left: 5px;"></i>
+                </div>
+                <h4 style="color: #fff; margin-bottom: 5px; font-family: 'Outfit', sans-serif;">Product Demo Coming Soon</h4>
+                <p style="color: #b0c4de; font-size: 0.9rem;">Video demo of MELC: To be created.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="case-studies" class="case-studies-section">
+        <div class="case-header">
+            <h2 class="section-title">Success Story</h2>
+            <p class="section-subtitle">Real-world impact on efficiency & growth.</p>
+        </div>
+
+        <div class="container" style="max-width: 1400px; margin: 0 auto;">
+            
+            <div class="case-intro-card">
+                <div class="case-intro-icon">
+                    <i class="fas fa-paw"></i>
+                </div>
+                <div>
+                    <h3 style="color: #fff; font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin-bottom: 10px;">Pet Product Platform (India)</h3>
+                    <p style="color: #b0c4de; line-height: 1.6;">
+                        MELC AI was implemented for a digital-first omni-channel platform offering pharmacy items, foods, and toys. The goal was to improve relationships through meaningful conversations with pet parents[cite: 62].
+                    </p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                    <p class="stat-desc">Higher growth & retention resulting in <strong>Increased Revenue</strong></p>
+                </div>
+                
+                <div class="stat-card">
+                    <span class="stat-number">88%</span>
+                    <p class="stat-desc">Faster coaching cycles</p>
+                </div>
+                
+                <div class="stat-card">
+                    <span class="stat-number">25%</span>
+                    <p class="stat-desc">Improvement in Customer Satisfaction</p>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-handshake"></i></div>
+                    <p class="stat-desc">More meaningful conversations & improved <strong>Relations</strong></p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <p class="stat-desc">Significant increase in <strong>Cross-selling</strong></p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+        <div class="case-header">
+            <h2 class="section-title">Subscription Plans</h2>
+            <p class="section-subtitle">Flexible tiers to scale your audit capabilities.</p>
+        </div>
+
+        <div class="pricing-grid">
+            
+            <div class="pricing-card">
+                <h3 class="plan-name">Starter</h3>
+                <div class="plan-price">$49<span>/mo</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> 10 hrs Transcription</li>
+                    <li><i class="fas fa-check"></i> Basic Sentiment Analysis</li>
+                    <li><i class="fas fa-check"></i> Email Support</li>
+                    <li><i class="fas fa-check"></i> 1 User Account</li>
+                </ul>
+                <a href="#" class="btn-pricing">Choose Starter</a>
+            </div>
+
+            <div class="pricing-card popular">
+                <h3 class="plan-name">Professional</h3>
+                <div class="plan-price">$149<span>/mo</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> 50 hrs Transcription</li>
+                    <li><i class="fas fa-check"></i> Advanced Analytics</li>
+                    <li><i class="fas fa-check"></i> Coaching Insights</li>
+                    <li><i class="fas fa-check"></i> Priority Support</li>
+                    <li><i class="fas fa-check"></i> 5 User Accounts</li>
+                </ul>
+                <a href="#" class="btn-pricing">Choose Pro</a>
+            </div>
+
+            <div class="pricing-card">
+                <h3 class="plan-name">Enterprise</h3>
+                <div class="plan-price">Custom</div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Unlimited Transcription</li>
+                    <li><i class="fas fa-check"></i> Full API Access</li>
+                    <li><i class="fas fa-check"></i> Custom Integrations</li>
+                    <li><i class="fas fa-check"></i> Dedicated Success Manager</li>
+                    <li><i class="fas fa-check"></i> SSO & Advanced Security</li>
+                </ul>
+                <a href="#contact" class="btn-pricing">Contact Sales</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="demo" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Request a Demo</h2>
+            <div class="contact-wrapper">
+                <div class="form-column" style="flex: 2;">
+                    <form action="#" method="POST" class="contact-form">
+                        
+                        <h4 style="color: #00ff7f; margin-bottom: 15px;">Contact Information</h4>
+                        <div class="form-group">
+                            <input type="text" name="fullname" placeholder="Full Name" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Work Email Address" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Phone Number" required class="form-input">
+                        </div>
+
+                        <h4 style="color: #00ff7f; margin: 25px 0 15px;">Company Details</h4>
+                        <div class="form-group">
+                            <input type="text" name="company" placeholder="Company Name" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <select name="company_size" class="form-input">
+                                <option value="" disabled selected>Company Size</option>
+                                <option value="1-50">1-50</option>
+                                <option value="51-200">51-200</option>
+                                <option value="201-1000">201-1000</option>
+                                <option value="1000+">1000+</option>
+                            </select>
+                        </div>
+
+                        <h4 style="color: #00ff7f; margin: 25px 0 15px;">Goals & Timeline</h4>
+                        <div class="form-group">
+                            <select name="goal" class="form-input">
+                                <option value="" disabled selected>What are you looking to achieve?</option>
+                                <option value="overview">Product Overview</option>
+                                <option value="compliance">Regulatory Compliance</option>
+                                <option value="analytics">Reporting & Analytics</option>
+                                <option value="automation">Automation</option>
+                                <option value="integration">Integration Capabilities</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="timeline" class="form-input">
+                                <option value="" disabled selected>Timeline to Implement</option>
+                                <option value="immediately">Immediately</option>
+                                <option value="1-3months">1-3 Months</option>
+                                <option value="3-6months">3-6 Months</option>
+                                <option value="exploring">Just Exploring</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="use_case" placeholder="Primary Use Case / Problem Statement" rows="3" class="form-input"></textarea>
+                        </div>
+
+                        <h4 style="color: #00ff7f; margin: 25px 0 15px;">Scheduling</h4>
+                        <div class="form-group" style="display: flex; gap: 10px;">
+                            <input type="date" name="demo_date" class="form-input">
+                            <input type="time" name="demo_time" class="form-input">
+                        </div>
+
+                        <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="consent" name="consent" required style="width: auto;">
+                            <label for="consent" style="color: #b0c4de; font-size: 0.9rem;">I agree to be contacted regarding this demo.</label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Schedule Demo</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-container">       
+            <div class="footer-col company-info">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="DataMatrix AI Logo" class="logo-img">
+                    <h2>Datamatrix<span class="highlight">.AI</span></h2>
+                </div>
+                <p class="company-desc">
+                    Transforming businesses through innovative AI solutions.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Main Home</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#case-studies">Case Studies</a></li>
+                    <li><a href="#pricing">Plans</a></li>
+                    <li><a href="#demo">Request Demo</a></li>
+                    <li><a href="accounts.html">Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                 <h3 class="footer-heading">Support</h3>
+                 <ul class="footer-links">
+                    <li><a href="index.html#contact">Contact Us</a></li>
+                 </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">&copy; 2025 DataMatrixai. All rights reserved.</div>
+        </div>
+    </footer>
+
+</body>
+</html>

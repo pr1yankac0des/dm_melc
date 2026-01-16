@@ -229,7 +229,7 @@
             flex-shrink: 0;
         }
 
-        /* --- UPDATED: SINGLE ROW STATS --- */
+        /* --- SINGLE ROW STATS --- */
         .stats-grid {
             display: flex;          
             flex-wrap: nowrap;      
@@ -457,7 +457,7 @@
                     MELC: <span class="highlight">Multi-modal Evaluation</span> <br>& Listening Companion
                 </h1>
                 <p class="hero-subtitle" style="margin-bottom: 25px;">
-                    MeLC (Multi-modal Evaluation & Listening Companion) is an AI powered Conversational Audit product which offers a multilingual audio transcription and audit platform that enhances customer satisfaction by ensuring accurate communication and responses. This tool is designed to streamline the auditing process, making it easier to analyse customer interactions and derive actionable insights.
+                    An AI-powered Conversational Audit product offering multilingual audio transcription and auditing to enhance customer satisfaction by ensuring accurate communication and responses.
                 </p>
                 <div class="hero-buttons">
                     <a href="#demo" class="btn-primary">Book a Demo</a>
@@ -473,27 +473,27 @@
             <div class="benefit-card">
                 <i class="fas fa-handshake benefit-icon"></i>
                 <h3>Deepens Relationships</h3>
-                <p>Enhanced personalized support drives Client Loyalty.</p>
+                [cite_start]<p>Enhanced personalized support drives Client Loyalty [cite: 6-7].</p>
             </div>
             <div class="benefit-card">
                 <i class="fas fa-chart-line benefit-icon"></i>
                 <h3>Accelerates CLV</h3>
-                <p>Converts transactional customers into long-term clients.</p>
+                [cite_start]<p>Converts transactional customers into long-term clients [cite: 8-9].</p>
             </div>
             <div class="benefit-card">
                 <i class="fas fa-coins benefit-icon"></i>
                 <h3>Unlocks Revenue</h3>
-                <p>Identifies precise moments for cross-selling and up-selling.</p>
+                [cite_start]<p>Identifies precise moments for cross-selling and up-selling [cite: 10-11].</p>
             </div>
             <div class="benefit-card">
                 <i class="fas fa-chalkboard-user benefit-icon"></i>
                 <h3>Empowers Managers</h3>
-                <p>Provides actionable intelligence for targeted coaching.</p>
+                [cite_start]<p>Provides actionable intelligence for targeted coaching [cite: 12-13].</p>
             </div>
             <div class="benefit-card">
                 <i class="fas fa-shield-halved benefit-icon"></i>
                 <h3>Tangible ROI</h3>
-                <p>Measurable improvements in Revenue and CSAT.</p>
+                [cite_start]<p>Measurable improvements in Revenue and CSAT [cite: 14-15].</p>
             </div>
         </div>
     </section>
@@ -574,7 +574,7 @@
                 <div>
                     <h3 style="color: #fff; font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin-bottom: 10px;">Pet Product Platform (India)</h3>
                     <p style="color: #b0c4de; line-height: 1.6;">
-                        MELC AI was implemented for a digital-first omni-channel platform offering pharmacy items, foods, and toys. The goal was to improve relationships through meaningful conversations with pet parents[cite: 62].
+                        MELC AI was implemented for a digital-first omni-channel platform offering pharmacy items, foods, and toys. The goal was to improve relationships through meaningful conversations with pet parents.
                     </p>
                 </div>
             </div>
@@ -752,21 +752,52 @@
                     <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#case-studies">Case Studies</a></li>
                     <li><a href="#pricing">Plans</a></li>
-                    <li><a href="#demo">Request Demo</a></li>
-                    <li><a href="accounts.html">Login</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                 <h3 class="footer-heading">Support</h3>
-                 <ul class="footer-links">
+                    <li><a href="accounts.html">Accounts</a></li>
                     <li><a href="index.html#contact">Contact Us</a></li>
-                 </ul>
+                </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="copyright">&copy; 2025 DataMatrixai. All rights reserved.</div>
         </div>
     </footer>
+
+    <script>
+        const form = document.querySelector('.contact-form');
+
+        if (form) {
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                
+                const submitBtn = form.querySelector('.submit-btn');
+                const originalText = submitBtn.innerText;
+                
+                // 1. Change button text to indicate processing
+                submitBtn.innerText = 'Sending...';
+                
+                // 2. Capture the data
+                const formData = new FormData(form);
+                
+                // 3. SEND TO GOOGLE SHEET (Backend)
+                // *** PASTE YOUR URL INSIDE THE QUOTES BELOW ***
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbzzmFlIWK01bsMs4APH2YJ-9QP7Jr1EB9jDFClxwm-X8o47FiFMETl-g0rUMupx2Qn7vw/exec'; 
+
+                fetch(scriptURL, { method: 'POST', body: formData })
+                    .then(response => {
+                        // Success!
+                        alert("Success! Your details have been stored in the Excel sheet.");
+                        form.reset();
+                        submitBtn.innerText = originalText;
+                    })
+                    .catch(error => {
+                        // Error!
+                        console.error('Error!', error.message);
+                        alert("Error! Something went wrong. Please check your console.");
+                        submitBtn.innerText = originalText;
+                    });
+            });
+        }
+    </script>
 
 </body>
 </html>

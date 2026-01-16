@@ -134,7 +134,7 @@
                 <li><a href="accounts.html" style="color: #00ff7f;">Login</a></li>
             </ul>
         </nav>
-        <a href="melc.html#contact" class="btn-reach">Request Demo</a>
+        <a href="melc.html#demo" class="btn-reach">Request Demo</a>
     </header>
 
     <section class="accounts-section">
@@ -147,15 +147,15 @@
         <div class="auth-grid">
             
             <div class="auth-form">
-                <h3>Sign In</h3>
-                <form action="#">
+                <h3>Sign In / Register</h3>
+                <form action="#" method="POST" class="login-form">
                     <div class="form-group">
                         <label style="color: #b0c4de; font-size: 0.9rem; margin-bottom: 5px; display:block;">Work Email</label>
-                        <input type="email" placeholder="name@company.com" class="form-input" required>
+                        <input type="email" name="work_email" placeholder="name@company.com" class="form-input" required>
                     </div>
                     <div class="form-group">
                         <label style="color: #b0c4de; font-size: 0.9rem; margin-bottom: 5px; display:block;">Password</label>
-                        <input type="password" placeholder="••••••••" class="form-input" required>
+                        <input type="password" name="password" placeholder="••••••••" class="form-input" required>
                     </div>
                     
                     <button type="submit" class="submit-btn" style="margin-bottom: 20px;">Log In</button>
@@ -234,6 +234,39 @@
             <div class="copyright">&copy; 2025 DataMatrixai. All rights reserved.</div>
         </div>
     </footer>
+
+    <script>
+        const loginForm = document.querySelector('.login-form');
+
+        if (loginForm) {
+            loginForm.addEventListener('submit', e => {
+                e.preventDefault();
+                
+                const submitBtn = loginForm.querySelector('.submit-btn');
+                const originalText = submitBtn.innerText;
+                
+                submitBtn.innerText = 'Signing In...';
+                
+                const formData = new FormData(loginForm);
+                
+                // USE YOUR SAME GOOGLE SCRIPT URL HERE
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbxm6F7W0PG1M0V8rhR15jx4Ari2QWz3nn5eBj0EOH65ehUmGMFHdRbkY4b1nNbe_tUAlg/exec';
+
+                fetch(scriptURL, { method: 'POST', body: formData })
+                    .then(response => {
+                        // Success!
+                        alert("Account details captured! (Check your Google Sheet)");
+                        loginForm.reset();
+                        submitBtn.innerText = originalText;
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        alert("Error! Please check console.");
+                        submitBtn.innerText = originalText;
+                    });
+            });
+        }
+    </script>
 
 </body>
 </html>

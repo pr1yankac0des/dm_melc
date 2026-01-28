@@ -42,28 +42,29 @@
             transition: all 0.5s ease;
         }
         
-        /* The Locked State (Default) */
-        .locked-content {
-            filter: blur(8px);
-            pointer-events: none;
-            opacity: 0.5;
-            user-select: none;
-        }
+        .locked-content { filter: blur(8px); pointer-events: none; opacity: 0.5; user-select: none; }
         
         .lock-overlay {
             position: absolute; top: 50%; left: 70%; 
             transform: translate(-50%, -50%);
             text-align: center; color: white; z-index: 10;
-            display: block; /* Visible by default */
+            display: block; 
         }
 
-        /* --- PROGRESS BARS --- */
+        /* --- DASHBOARD ELEMENTS --- */
         .progress-bar { width: 100%; height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; margin-bottom: 25px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--accent-blue); width: 45%; border-radius: 4px; }
         .plan-badge { display: inline-block; background: rgba(0, 255, 127, 0.1); color: #00ff7f; padding: 5px 12px; border-radius: 5px; font-size: 0.8rem; margin-top: 5px; border: 1px solid rgba(0, 255, 127, 0.2); font-weight: 600; }
         .usage-stat { display: flex; justify-content: space-between; margin-bottom: 10px; color: #b0c4de; font-size: 0.9rem; }
         .section-header-accounts { text-align: center; margin-bottom: 20px; }
         .form-hidden { display: none; }
+
+        /* Plan Selector Style */
+        .plan-select {
+            background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2);
+            color: white; padding: 10px; border-radius: 5px; width: 100%;
+            margin-top: 10px; font-family: 'Outfit', sans-serif;
+        }
 
         @media (max-width: 900px) { .auth-grid { grid-template-columns: 1fr; padding: 30px; } .profile-card { margin-top: 30px; } .lock-overlay { left: 50%; } }
     </style>
@@ -82,7 +83,11 @@
                 <li><a href="melc.html">Home</a></li>
                 <li><a href="melc.html#how-it-works">Features</a></li>
                 <li><a href="melc.html#pricing">Plans</a></li>
-                <li><a href="accounts.html" style="color: #00ff7f;">Login</a></li>
+                
+                <li id="nav-login-item"><a href="accounts.html" style="color: #00ff7f;">Login</a></li>
+                <li id="nav-user-item" style="display: none; color: white; font-weight: 600; border: 1px solid rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px;">
+                    Hi, <span id="header-username">User</span>
+                </li>
             </ul>
         </nav>
         <a href="melc.html#demo" class="btn-reach">Request Demo</a>
@@ -106,7 +111,7 @@
                     <h3 style="font-size: 1.2rem;">Welcome Back</h3>
                     <div class="form-group">
                         <label style="color: #b0c4de; font-size: 0.9rem; margin-bottom: 5px; display:block;">Work Email</label>
-                        <input type="email" name="work_email" placeholder="name@company.com" class="form-input" required>
+                        <input type="email" name="work_email" id="login_email" placeholder="name@company.com" class="form-input" required>
                     </div>
                     <div class="form-group">
                         <label style="color: #b0c4de; font-size: 0.9rem; margin-bottom: 5px; display:block;">Password</label>
@@ -145,22 +150,29 @@
                 <div id="profileContent" class="profile-card locked-content">
                     <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
                         <div>
-                            <h4 style="color: #fff; font-size: 1.4rem; margin-bottom: 5px;">Professional Plan</h4>
+                            <h4 id="display-plan-name" style="color: #fff; font-size: 1.4rem; margin-bottom: 5px;">Starter Plan</h4>
                             <span class="plan-badge">Active</span>
                         </div>
                         <div style="text-align: right;">
-                            <h2 style="color: var(--accent-blue); margin: 0; font-size: 2rem;">$149</h2>
-                            <span style="color: #b0c4de; font-size: 0.85rem;">/ month</span>
+                            <h2 style="color: var(--accent-blue); margin: 0; font-size: 2rem;">--</h2>
                         </div>
                     </div>
+
                     <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 25px;">
-                    <div class="usage-stat"><span>Transcription Hours</span><span>22 / 50 hrs</span></div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 44%;"></div></div>
-                    <div class="usage-stat"><span>Storage Used</span><span>45%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 45%; background: #00ff7f;"></div></div>
-                    <div style="margin-top: auto; display: flex; gap: 15px;">
+                    
+                    <div class="usage-stat"><span>Transcription Hours</span><span>0 / 10 hrs</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 10%;"></div></div>
+                    
+                    <label style="color: white; font-size: 0.9rem; margin-bottom: 5px; display: block;">Change Subscription:</label>
+                    <select id="plan-selector" class="plan-select">
+                        <option value="Starter">Starter ($49/mo)</option>
+                        <option value="Professional">Professional ($149/mo)</option>
+                        <option value="Enterprise">Enterprise (Custom)</option>
+                    </select>
+
+                    <div style="margin-top: 15px; display: flex; gap: 15px;">
                         <button class="btn-outline" style="flex: 1; font-size: 0.9rem; padding: 10px;">View Invoices</button>
-                        <button class="btn-primary" style="flex: 1; font-size: 0.9rem; padding: 10px; border: none;">Upgrade Plan</button>
+                        <button id="btn-save-plan" class="btn-primary" style="flex: 1; font-size: 0.9rem; padding: 10px; border: none;">Save Plan</button>
                     </div>
                 </div>
             </div>
@@ -205,7 +217,24 @@
         }
 
         // --- 2. BACKEND CONNECTION ---
-        const scriptURL ='https://script.google.com/macros/s/AKfycbxm6F7W0PG1M0V8rhR15jx4Ari2QWz3nn5eBj0EOH65ehUmGMFHdRbkY4b1nNbe_tUAlg/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxm6F7W0PG1M0V8rhR15jx4Ari2QWz3nn5eBj0EOH65ehUmGMFHdRbkY4b1nNbe_tUAlg/exec';
+        let currentUserEmail = ""; // To track who is logged in
+
+        // HELPER: Update UI State
+        function updateUI(fullname, plan) {
+            // Unlock Dashboard
+            document.getElementById('lockOverlay').style.display = 'none';
+            document.getElementById('profileContent').classList.remove('locked-content');
+            
+            // Update Header Name
+            document.getElementById('nav-login-item').style.display = 'none';
+            document.getElementById('nav-user-item').style.display = 'block';
+            document.getElementById('header-username').innerText = fullname;
+
+            // Update Plan Display & Dropdown
+            document.getElementById('display-plan-name').innerText = plan + " Plan";
+            document.getElementById('plan-selector').value = plan;
+        }
 
         // Handle SIGN UP
         document.getElementById('signupForm').addEventListener('submit', e => {
@@ -217,12 +246,12 @@
             fetch(scriptURL, { method: 'POST', body: new FormData(e.target) })
                 .then(res => res.json())
                 .then(data => {
-                    alert("Account Created Successfully! Please Sign In.");
+                    alert("Account Created! Default plan is Starter. Please Sign In.");
                     e.target.reset();
-                    toggleForm('login'); // Switch to login view
+                    toggleForm('login'); 
                     btn.innerText = originalText;
                 })
-                .catch(err => { alert("Error connecting to backend."); console.error(err); });
+                .catch(err => { alert("Error connecting."); console.error(err); });
         });
 
         // Handle LOGIN
@@ -231,22 +260,49 @@
             const btn = e.target.querySelector('button');
             const originalText = btn.innerText;
             btn.innerText = "Verifying...";
+            
+            // Capture email for later use
+            currentUserEmail = document.getElementById('login_email').value;
 
             fetch(scriptURL, { method: 'POST', body: new FormData(e.target) })
                 .then(res => res.json())
                 .then(data => {
                     if (data.result === 'success') {
-                        // SUCCESS: Unlock Dashboard
-                        document.getElementById('lockOverlay').style.display = 'none';
-                        document.getElementById('profileContent').classList.remove('locked-content');
-                        alert("Login Successful! Dashboard Unlocked.");
+                        // SUCCESS: Pass user data to UI updater
+                        updateUI(data.user.fullname, data.user.plan);
+                        alert("Login Successful!");
                     } else {
-                        // FAIL
-                        alert("Invalid Email or Password. Please try again.");
+                        alert("Invalid Credentials.");
                     }
                     btn.innerText = originalText;
                 })
-                .catch(err => { alert("Error connecting to backend."); console.error(err); });
+                .catch(err => { alert("Error connecting."); console.error(err); });
+        });
+
+        // Handle SAVE PLAN
+        document.getElementById('btn-save-plan').addEventListener('click', () => {
+            if(!currentUserEmail) { alert("Please login first."); return; }
+            
+            const newPlan = document.getElementById('plan-selector').value;
+            const btn = document.getElementById('btn-save-plan');
+            btn.innerText = "Saving...";
+
+            const formData = new FormData();
+            formData.append('action', 'update_plan');
+            formData.append('work_email', currentUserEmail);
+            formData.append('plan', newPlan);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        alert("Plan Updated Successfully! It will appear on next login.");
+                        document.getElementById('display-plan-name').innerText = newPlan + " Plan";
+                    } else {
+                        alert("Error updating plan.");
+                    }
+                    btn.innerText = "Save Plan";
+                });
         });
     </script>
 
